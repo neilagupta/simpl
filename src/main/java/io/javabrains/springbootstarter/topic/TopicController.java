@@ -32,14 +32,14 @@ public class TopicController {
         return topicService.getAllTopics();
     }
 
-    @RequestMapping(value = "/simpl/{url}", method = RequestMethod.POST)
-    public String cool(@PathVariable("url") String url) throws TextAPIException, MalformedURLException {
+    @RequestMapping(value = "/simpl/url", method = RequestMethod.POST)
+    public String cool(@RequestParam("link") String link) throws TextAPIException, MalformedURLException {
 
         TextAPIClient client = new TextAPIClient("17f4651a", "96c204d7f5cf1c91d23f64ac0fa55408");
         SentimentParams.Builder builder = SentimentParams.newBuilder();
         builder.setText("John is a very good football player");
         SummarizeParams.Builder builder1 = SummarizeParams.newBuilder();
-        builder1.setUrl(new URL(url));
+        builder1.setUrl(new URL(link));
         builder1.setNumberOfSentences(5);
         Summarize summarize = client.summarize(builder1.build());
 
