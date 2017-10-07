@@ -1,11 +1,18 @@
 package io.javabrains.springbootstarter.topic;
 
+import com.aylien.textapi.TextAPIException;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.aylien.textapi.TextAPIClient;
+import com.aylien.textapi.parameters.*;
+import com.aylien.textapi.responses.*;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -25,15 +32,25 @@ public class TopicController {
         return topicService.getAllTopics();
     }
 
-    @RequestMapping(value = "/simpl/{id}", method = RequestMethod.POST)
-    public String cool(@PathVariable("id") String id) throws UnirestException {
+    @RequestMapping(value = "/simpl/{url}", method = RequestMethod.POST)
+    public String cool(@PathVariable("url") String url) throws TextAPIException, MalformedURLException {
 
-        HttpResponse request = Unirest.post("https://textanalysis-text-summarization.p.mashape.com/text-summarizer")
-                .header("X-Mashape-Authorization", "nwAwI2JPcnmshwcmFIskhiyChn5kp1H2MG0jsnwjVduJ03YAw9")
-                .header("Content-Type", "application/json")
-                .body("{\"url\":\"http://en.wikipedia.org/wiki/Automatic_summarization\",\"text\":\"\",\"sentnum\":8}")
-                .asJson();
-        return request.getBody().toString();
+        TextAPIClient client = new TextAPIClient("17f4651a", "96c204d7f5cf1c91d23f64ac0fa55408");
+        SentimentParams.Builder builder = SentimentParams.newBuilder();
+        builder.setText("John is a very good football player");
+        SummarizeParams.Builder builder1 = SummarizeParams.newBuilder();
+        builder1.setUrl(new URL(url));
+        builder1.setNumberOfSentences(5);
+        Summarize summarize = client.summarize(builder1.build());
+
+        //Sentiment sentiment = client.sentiment(builder.build());
+        String x = "";
+        for (int i = 0; i < summarize.getSentences().length; i++) {
+            x = x + " " + summarize.getSentences()[i];
+        }
+
+        System.out.println(x);
+        return x;
     }
 
     @RequestMapping("/topics/{foo}")
