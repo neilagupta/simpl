@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Sat Oct 07 15:14:22 PDT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015e-f8e7-5106-00000be5d6c8 
-on database directory memory:/Users/Shiv/CalHacks/course-api-data/testdb with class loader sun.misc.Launcher$AppClassLoader@6acbcfc0 
-Loaded from file:/Users/Shiv/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
+Sat Oct 07 15:25:41 PDT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015e-f8f1-abeb-000007dbc518 
+on database directory memory:/Users/neilagupta/Developer/misc/simpl/testdb with class loader sun.misc.Launcher$AppClassLoader@4f3f5b24 
+Loaded from file:/Users/neilagupta/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_111-b14
-user.dir=/Users/Shiv/CalHacks/course-api-data
+java.runtime.version=1.8.0_60-b27
+user.dir=/Users/neilagupta/Developer/misc/simpl
 os.name=Mac OS X
 os.arch=x86_64
-os.version=10.13
+os.version=10.12.6
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

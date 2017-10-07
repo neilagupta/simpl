@@ -45,15 +45,17 @@ public class TopicController {
         Summarize summarize = client.summarize(builder1.build());
 
         //Sentiment sentiment = client.sentiment(builder.build());
-        String x = "";
+        String resultString;
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < summarize.getSentences().length; i++) {
-            x = x + " " + summarize.getSentences()[i];
+            sb.append(summarize.getSentences()[i]);
         }
+        resultString = sb.toString();
 
-        System.out.println(x);
+        System.out.println(resultString);
 
         JSONObject result =  new JSONObject();
-        result.put("result", x);
+        result.put("result", resultString);
 
         return result.toString();
     }
