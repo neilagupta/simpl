@@ -41,7 +41,7 @@ public class TopicController {
         builder.setText("John is a very good football player");
         SummarizeParams.Builder builder1 = SummarizeParams.newBuilder();
         builder1.setUrl(new URL(link));
-        builder1.setNumberOfSentences(5);
+        builder1.setNumberOfSentences(3);
         Summarize summarize = client.summarize(builder1.build());
 
         //Sentiment sentiment = client.sentiment(builder.build());
