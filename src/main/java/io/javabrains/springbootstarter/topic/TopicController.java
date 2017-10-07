@@ -4,6 +4,7 @@ import com.aylien.textapi.TextAPIException;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,7 +51,11 @@ public class TopicController {
         }
 
         System.out.println(x);
-        return x;
+
+        JSONObject result =  new JSONObject();
+        result.put("result", x);
+
+        return result.toString();
     }
 
     @RequestMapping("/topics/{foo}")
