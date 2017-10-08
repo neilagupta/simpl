@@ -3,7 +3,7 @@ import urllib2
 import json
 
 
-def sendJavaPOST(url):
+def sendPOST(url):
     """
     This method is used for:
     - sending POST request to summarizer
@@ -65,7 +65,7 @@ def index(request):
             msg = "The message is summarized as follows: "
         else:
             # TODO: call the summarizer API - update "http://"                                                                                                                                              
-            #sendJavaPOST("http://SOMEMSG", {"link": in_message})                                                                                                                                           
+            #sendPOST("http://SOMEMSG", {"link": in_message})                                                                                                                                           
             msg = "Waiting for message"
 
         if msg != None:
