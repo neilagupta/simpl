@@ -61,10 +61,11 @@ def index(request):
         in_message = in_message.replace(bot_name, '')
 
         # TODO: call the summarizer API - update "http://"                                                                                                                                             
-        sendPOST("https://simpl-182222.appspot.com/simpl/url", {"link": in_message})
+        jsonResponse = sendPOST("https://simpl-182222.appspot.com/simpl/url", {"link": in_message})
+
         # process response
         
-        msg = "TODO: the message"
+        msg = jsonResponse
 
         if msg != None:
             print msg
