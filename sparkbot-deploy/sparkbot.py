@@ -14,19 +14,7 @@ def sendGET(url):
     contents = urllib2.urlopen(request).read()
     return contents
 
-"""
-def sendPOST(url, data):
-    #This method is used for:
-    #- sending POST request to summarizer
-    #
-    request = urllib2.Request(url, json.dumps(data),
-                            headers={})
 
-    print request
-    #request.add_header("Authorization", "Bearer "+bearer) # trying to disable authorization right now
-    contents = urllib2.urlopen(request).read()
-    return contents
-"""
 def sendPOST(url, data):
     contents = requests.post(url, data)
     return contents
@@ -74,26 +62,19 @@ def index(request):
     print webhook['data']['id']
     result = sendSparkGET('https://api.ciscospark.com/v1/messages/{0}'.format(webhook['data']['id']))
     result = json.loads(result)
-    print "Squaaaw"
+
     msg = None
     if webhook['data']['personEmail'] != bot_email:
         in_message = result.get('text', '').lower()
         in_message = in_message.replace(bot_name, '')
 
-        print "Shiv's dumb"
-        
-        # TODO: sned get to see if works
-        sendNudes = sendGET("https://simpl-182222.appspot.com/topics")
-        print "KIRAT", sendNudes
-
         # TODO: call the summarizer API - update "http://"
         jsonResponse = sendPOST("https://simpl-182222.appspot.com/simpl/url", {"link": in_message})
         
-        print "Shiv's smart"
         # process response
         jsonResponse = jsonResponse.json()
 
-        msg = jsonResponse['result']
+        msg = '-- Summary --\n' + jsonResponse['result'] + '\n---'
 
         if msg != None:
             print msg
