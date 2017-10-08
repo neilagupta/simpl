@@ -2,7 +2,6 @@ from itty import *
 import urllib2
 import json
 
-
 def sendPOST(url):
     """
     This method is used for:
@@ -61,12 +60,11 @@ def index(request):
         in_message = result.get('text', '').lower()
         in_message = in_message.replace(bot_name, '')
 
-        if return_code in in_message:
-            msg = "The message is summarized as follows: "
-        else:
-            # TODO: call the summarizer API - update "http://"                                                                                                                                              
-            #sendPOST("http://SOMEMSG", {"link": in_message})                                                                                                                                           
-            msg = "Waiting for message"
+        # TODO: call the summarizer API - update "http://"                                                                                                                                             
+        sendPOST("https://simpl-182222.appspot.com/simpl/url", {"link": in_message})
+        # process response
+        
+        msg = "TODO: the message"
 
         if msg != None:
             print msg
@@ -76,7 +74,6 @@ def index(request):
 
 
 ####CHANGE THESE VALUES#####
-return_code = "0lL39yQPeUblzUbUOfKomz6t51s22cLX!$Ft"
 bot_email = "simpl@sparkbot.io"
 bot_name = "simpl"
 bearer = "NjNhNWY1YjQtZjhhNy00MDM1LTkxYjEtNjI3NTMwYzI1Y2FlNWYyMzBlNmEtNGNk"
