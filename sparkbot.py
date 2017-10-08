@@ -61,6 +61,13 @@ def index(request):
         in_message = result.get('text', '').lower()
         in_message = in_message.replace(bot_name, '')
 
+        if return_code in in_message:
+            msg = "The message is summarized as follows: "
+        else:
+            # TODO: call the summarizer API - update "http://"                                                                                                                                              
+            #sendJavaPOST("http://SOMEMSG", {"link": in_message})                                                                                                                                           
+            msg = "Waiting for message"
+
         if msg != None:
             print msg
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
