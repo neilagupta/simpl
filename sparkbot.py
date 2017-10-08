@@ -3,6 +3,18 @@ import urllib2
 import json
 
 
+def sendJavaPOST(url):
+    """
+    This method is used for:
+    - sending POST request to summarizer
+    """
+    request = urllib2.Request(url, json.dumps(data),
+                            headers={"Accept" : "application/json",
+                                     "Content-Type":"application/json"})
+    #request.add_header("Authorization", "Bearer "+bearer) # trying to disable authorization right now
+    contents = urllib2.urlopen(request).read()
+    return contents
+
 def sendSparkGET(url):
     """
     This method is used for:
@@ -48,26 +60,18 @@ def index(request):
     if webhook['data']['personEmail'] != bot_email:
         in_message = result.get('text', '').lower()
         in_message = in_message.replace(bot_name, '')
-        if 'batman' in in_message or "whoareyou" in in_message:
-            msg = "I'm Batman!"
-        elif 'batcave' in in_message:
-            message = result.get('text').split('batcave')[1].strip(" ")
-            if len(message) > 0:
-                msg = "The Batcave echoes, '{0}'".format(message)
-            else:
-                msg = "The Batcave is silent..."
-        elif 'batsignal' in in_message:
-            print "NANA NANA NANA NANA"
-            sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "files": bat_signal})
+
         if msg != None:
             print msg
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
+
     return "true"
 
 
 ####CHANGE THESE VALUES#####
+return_code = "0lL39yQPeUblzUbUOfKomz6t51s22cLX!$Ft"
 bot_email = "simpl@sparkbot.io"
 bot_name = "simpl"
 bearer = "NjNhNWY1YjQtZjhhNy00MDM1LTkxYjEtNjI3NTMwYzI1Y2FlNWYyMzBlNmEtNGNk"
 bat_signal  = "https://upload.wikimedia.org/wikipedia/en/c/c6/Bat-signal_1989_film.jpg"
-run_itty(server='wsgiref', host='0.0.0.0', port=10010)
+run_itty(server='wsgiref', host='localhost', port=10010)
